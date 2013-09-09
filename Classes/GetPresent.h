@@ -24,15 +24,18 @@ using namespace cocos2d::extension;
 class GetPresent : public CCLayer, public extension::CCEditBoxDelegate{
 private:
     CCSize size;
-    
+
     int userOK;
     int userOKName;
     int userOKMail;
-    
+
     float w, h;
     float SIZE_RATIO;
     float SIZE_RATIO_X;
     float SIZE_RATIO_Y;
+
+    bool isSent;
+
     CCLabelTTF *emailFailMsg;
     CCLabelTTF *emailExistedMsg;
     CCLabelTTF *nameFailMsg;

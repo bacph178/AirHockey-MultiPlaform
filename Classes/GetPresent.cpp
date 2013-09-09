@@ -25,6 +25,7 @@ CCScene* GetPresent::scene() {
 }
 
 bool GetPresent::init() {
+    isSent = true;
     userOK = 1;
     userOKName = 1;
     userOKMail = 1;
@@ -231,13 +232,14 @@ void GetPresent::menuSendEmail(CCObject *pSender) {
         nameFailMsg->runAction(CCSequence::create(showAction, hideAction, NULL));
     } else j = 1;
     
-    if (i * j * userOKName * userOKMail == 1) {
+    if ((i * j * userOKName * userOKMail == 1) && isSent) {
         char *name =(char*) m_pUserName->getText();
         standardizeName(name);
         removeSpace(name);
         GameManager::sharedGameManager()->setName(name);
         string ipAddr = GameManager::sharedGameManager()->getIpAddr();
         string url = ipAddr +"/users.json";
+        isSent = false;
         this->postUrl(url);
         this->sendMail();
     }else {
